@@ -1,8 +1,10 @@
 <RCC>
     <qresource prefix="/images">
-        <file>AXON_HMS_logo.jpg</file>
         <file>admin.png</file>
         <file>doctor.png</file>
         <file>receptionist.png</file>
+        <file>AXON_HMS_logo.png</file>
+        <file>AXON_Background.png</file>
+        <file>AXON_Monogram.png</file>
     </qresource>
 </RCC>
