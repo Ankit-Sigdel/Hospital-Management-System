@@ -17,6 +17,9 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow() override;
 
+private slots:
+    void on_forgotPasswordLabel_linkActivated(const QString &link);
+
 private:
     Ui::MainWindow *ui;
 };
