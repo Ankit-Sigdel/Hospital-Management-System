@@ -1,6 +1,6 @@
 #ifndef ADMIN_H
 #define ADMIN_H
-#include "ui_adminwindow.h"
+
 #include <QMainWindow>
 #include <QTimer>
 #include <QVector>
@@ -13,6 +13,9 @@
 QT_BEGIN_NAMESPACE
 namespace Ui { class admin; }
 QT_END_NAMESPACE
+
+// Forward declaration — avoids pulling in WebEngine headers here
+class GoogleCalendarWindow;
 
 // ─── Data structures ───────────────────────────────────────────────
 struct StaffRecord {
@@ -49,7 +52,7 @@ private slots:
     void onAddStaffClicked();
     void onNavDashboard();
     void onNavPatient();
-    void onNavSchedule();
+    void onNavSchedule();   // Opens Google Calendar
     void onNavMedRecords();
     void onNavSettings();
     void onNavLogout();
@@ -69,8 +72,11 @@ private:
 
     Ui::admin *ui;
 
-    // Pointer back to the login window so logout can show it again
+    // Pointer back to login window so logout can show it again
     QWidget *m_loginWindow = nullptr;
+
+    // Google Calendar window — created once, reused on subsequent clicks
+    GoogleCalendarWindow *m_calendarWindow = nullptr;
 
     QVector<StaffRecord> m_allStaff;
     QVector<StaffRecord> m_filteredStaff;

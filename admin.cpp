@@ -1,6 +1,15 @@
-
+/*
+ * admin.cpp
+ * AXON Hospital Management System — Admin Dashboard
+ *
+ * Reads staff.csv  and bedstats.csv from the Qt resource system (:/database/)
+ * OR from the executable's working directory as fallback.
+ *
+ * Logout hides this window and shows the login window again.
+ */
 
 #include "admin.h"
+#include "googlecalendarwindow.h"
 #include "ui_adminwindow.h"   // generated from Forms/adminwindow.ui
 
 #include <QDateTime>
@@ -472,9 +481,25 @@ void admin::onAddStaffClicked()
 // ── Navigation stubs ────────────────────────────────────────────────
 void admin::onNavDashboard()  { /* already on dashboard */ }
 void admin::onNavPatient()    { QMessageBox::information(this, "Navigation", "Patient List — coming soon."); }
-void admin::onNavSchedule()   { QMessageBox::information(this, "Navigation", "Schedule — coming soon."); }
 void admin::onNavMedRecords() { QMessageBox::information(this, "Navigation", "Medical Records — coming soon."); }
 void admin::onNavSettings()   { QMessageBox::information(this, "Navigation", "Settings — coming soon."); }
+
+// ── Schedule: open Google Calendar in a persistent WebEngine window ──
+void admin::onNavSchedule()
+{
+    if (!m_calendarWindow) {
+        // Create once; WA_DeleteOnClose resets the pointer when closed
+        m_calendarWindow = new GoogleCalendarWindow(this);
+        m_calendarWindow->setAttribute(Qt::WA_DeleteOnClose);
+        connect(m_calendarWindow, &QObject::destroyed, this, [this]{
+            m_calendarWindow = nullptr;  // reset so it can be recreated
+        });
+    }
+    // Bring to front if already open
+    m_calendarWindow->show();
+    m_calendarWindow->raise();
+    m_calendarWindow->activateWindow();
+}
 
 void admin::onNavLogout()
 {
@@ -483,10 +508,10 @@ void admin::onNavLogout()
                                     QMessageBox::Yes | QMessageBox::No);
 
     if (ret == QMessageBox::Yes) {
-        // Show the login window again, then close this window
+        // Show the login window again
         if (m_loginWindow) {
             m_loginWindow->show();
         }
-        this->close();   // WA_DeleteOnClose will free memory
+        this->close();
     }
 }

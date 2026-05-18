@@ -24,7 +24,7 @@ void MainWindow::on_forgotPasswordLabel_linkActivated(const QString &/*link*/)
                              "Please contact the System Administrator to reset your password.");
 }
 
-// Login button — authenticate from CSV, open admin/doctor/receptionist window if valid
+// Login button — authenticate from CSV, open admin window if valid
 void MainWindow::on_loginButton_clicked()
 {
     QString enteredUser = ui->usernameInput->text().trimmed();

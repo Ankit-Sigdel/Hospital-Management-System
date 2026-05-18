@@ -1,11 +1,16 @@
-#include "mainwindow.h"
-
 #include <QApplication>
+#include "mainwindow.h"
 
 int main(int argc, char *argv[])
 {
-    QApplication a(argc, argv);
-    MainWindow w;
-    w.show();
-    return QCoreApplication::exec();
+    QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+    QCoreApplication::setAttribute(Qt::AA_UseHighDpiPixmaps);
+
+    QApplication app(argc, argv);
+    app.setOrganizationName("AXON");
+    app.setApplicationName("AXON_HMS");
+
+    MainWindow loginWin;
+    loginWin.show();
+    return app.exec();
 }

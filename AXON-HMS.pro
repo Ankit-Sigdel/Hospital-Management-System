@@ -1,5 +1,5 @@
 QT += widgets
-
+QT += webenginewidgets
 CONFIG += c++17
 
 # You can make your code fail to compile if it uses deprecated APIs.
@@ -8,12 +8,16 @@ CONFIG += c++17
 
 SOURCES += \
     admin.cpp \
+    googlecalendarwindow.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    sessionmanager.cpp
 
 HEADERS += \
     admin.h \
-    mainwindow.h
+    googlecalendarwindow.h \
+    mainwindow.h \
+    sessionmanager.h
 
 FORMS += \
     adminwindow.ui \

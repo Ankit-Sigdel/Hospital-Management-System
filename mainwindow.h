@@ -2,7 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include "admin.h"   // admin dashboard window
+#include "admin.h"          // admin dashboard window
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
